@@ -1,10 +1,11 @@
+import jwtDecode from 'jwt-decode'
 import {LOGIN_REQUEST, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT } from "../constants"
 
-const initialState = {
+const initialState = (token => ({
   isAuthenticating: false,
-  currentUser: null,
+  currentUser: token ? jwtDecode(token) : null,
   errorMessage: null
-}
+}))(localStorage.authToken)
 
 export default function(state = initialState, action = {}) {
   switch (action.type) {

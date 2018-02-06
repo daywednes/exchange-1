@@ -12,11 +12,11 @@ export function login(credentials) {
         querystring.stringify({...credentials, grant_type: "password"})
     )
       .then(function (response) {
-          //localStorage.authToken = res.data.token
-          debugger;
+          const {Data, Errors, Info, Type} = response.data
+          localStorage.authToken = Data.access_token
           dispatch({
             type: LOGIN_SUCCESS,
-            user: jwtDecode(response.data.token)
+            user: jwtDecode(Data.access_token)
           })
       })
       .catch(function (error) {
@@ -26,4 +26,9 @@ export function login(credentials) {
           })
       });
   }
+}
+
+export function logout() {
+  delete localStorage.authToken
+  return { type: LOGOUT }
 }
