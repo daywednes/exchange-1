@@ -1,4 +1,5 @@
 var path = require('path')
+var config = require('./config')
 
 module.exports = {
     devtool: 'source-map',
@@ -10,6 +11,13 @@ module.exports = {
         filename: 'bundle.js',
         publicPath: '/static/'
     },
+    devServer: {
+        proxy: [{
+            path: '/api/',
+            target: config.server,
+            changeOrigin: true
+        }]
+    },    
     module: {
         loaders: [
             {
