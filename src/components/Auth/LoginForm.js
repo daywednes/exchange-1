@@ -11,6 +11,7 @@ class LoginForm extends Component {
 
 	render() {
 		const {system: {isAuthenticating, currentUser, errorMessage}} = this.props
+		const currentUserName = currentUser ? currentUser["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] : null
 		let form = null
 
 		if (currentUser) {
@@ -29,7 +30,7 @@ class LoginForm extends Component {
 		}
 		return (
 			<div>	
-				<h3>Auth</h3>
+				<h3>Auth {currentUserName}</h3>
 				{form}
 			</div>
 		);

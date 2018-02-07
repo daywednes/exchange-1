@@ -1,0 +1,10 @@
+#AuthName "What do you want?"
+#AuthType Basic
+#AuthUserFile /path from file pwd.php/.htpasswd
+#require valid-user
+
+# htpasswd generator: http://www.htaccesstools.com/htpasswd-generator/
+
+RewriteEngine On
+RewriteBase    /
+RewriteRule    "^api/(.*)$"  "http://server_ip/api/$1"  [P]

@@ -58,3 +58,5 @@ typings/
 .env
 
 /config.js
+/build/
+/.idea/
