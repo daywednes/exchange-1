@@ -1,11 +1,11 @@
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import querystring from 'querystring';
-import {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../constants"
+import {LOGIN, LOGOUT, START, FAIL, SUCCESS} from "../constants"
 
 export function login(credentials) {
   return dispatch => {
-    dispatch({ type: LOGIN_REQUEST })
+    dispatch({ type: LOGIN + START })
 
     axios.post(
         '/api/authentication/login', 
@@ -14,14 +14,21 @@ export function login(credentials) {
       .then(function (response) {
           const {Data, Errors, Info, Type} = response.data
           localStorage.authToken = Data.access_token
-          dispatch({
-            type: LOGIN_SUCCESS,
-            user: jwtDecode(Data.access_token)
-          })
+          if (!Errors) {
+            dispatch({
+              type: LOGIN + SUCCESS,
+              user: jwtDecode(Data.access_token)
+            })
+          } else {
+            dispatch({
+              type: LOGIN + FAIL,
+              errorMessage: Errors
+            })
+          }
       })
       .catch(function (error) {
           dispatch({
-            type: LOGIN_FAILURE,
+            type: LOGIN + FAIL,
             errorMessage: error
           })
       });

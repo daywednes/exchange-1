@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
-import {login, logout} from "../../AC"
+import {login, logout} from "../../AC/Auth"
 
 class LoginForm extends Component {
 	state = {

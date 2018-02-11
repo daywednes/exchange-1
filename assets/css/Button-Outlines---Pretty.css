@@ -1,0 +1,38 @@
+.border-pretty {
+  border:1px solid #dddddd;
+  width:100%;
+  text-align:left;
+  background:#f8f8f8;
+  padding-left:38px;
+  position:relative;
+  margin-bottom:-1px;
+  color:#333333;
+}
+
+.border-pretty:hover {
+  border:1px solid #ce9c95;
+  text-decoration:none;
+  color:#cc0256;
+  background:#fff;
+  z-index:10;
+}
+
+.border-pretty img {
+  height:29px;
+  position:absolute;
+  left:5px;
+  top:4px;
+}
+
+.choose-payment-system {
+  margin-top:20px;
+}
+
+.border-pretty:first-child {
+  border-radius:5px 5px 0 0;
+}
+
+.border-pretty:last-child {
+  border-radius:0 0 5px 5px;
+}
+

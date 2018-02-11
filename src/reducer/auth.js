@@ -1,5 +1,5 @@
 import jwtDecode from 'jwt-decode'
-import {LOGIN_REQUEST, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT } from "../constants"
+import {LOGIN, LOGOUT, START, FAIL, SUCCESS} from "../constants"
 
 const initialState = (token => ({
   isAuthenticating: false,
@@ -8,22 +8,24 @@ const initialState = (token => ({
 }))(localStorage.authToken)
 
 export default function(state = initialState, action = {}) {
+  const {errorMessage, user} = action
+
   switch (action.type) {
-    case LOGIN_REQUEST:
+    case LOGIN + START:
       return {
        	...state,
         isAuthenticating: true
       }
-    case LOGIN_FAILURE:
+    case LOGIN + FAIL:
       return {
        	...state,
         isAuthenticating: false,
-        errorMessage: action.errorMessage
+        errorMessage: errorMessage
       }
-    case LOGIN_SUCCESS:
+    case LOGIN + SUCCESS:
       return {
         isAuthenticating: false,
-        currentUser: action.user,
+        currentUser: user,
         errorMessage: null
       }
     case LOGOUT:
