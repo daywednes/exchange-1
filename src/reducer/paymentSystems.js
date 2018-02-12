@@ -17,9 +17,7 @@ export default function(state = initialState, action = {}) {
       }
     case LOAD_ALL_PAYMENT_SYSTEMS + FAIL:
       return {
-       	...state,
-        loaded: false,
-        loading: false
+       	...state
       }
     case LOAD_ALL_PAYMENT_SYSTEMS + SUCCESS:
       return {

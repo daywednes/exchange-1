@@ -14,7 +14,7 @@ export function login(credentials) {
       .then(function (response) {
           const {Data, Errors, Info, Type} = response.data
           localStorage.authToken = Data.access_token
-          if (!Errors) {
+          if (Errors.length == 0) {
             dispatch({
               type: LOGIN + SUCCESS,
               user: jwtDecode(Data.access_token)

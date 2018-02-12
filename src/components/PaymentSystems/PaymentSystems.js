@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {filtratedPaymentSystemsSelector} from '../selectors'
-import {loadAllPaymentSystems} from '../AC/PaymentSystems'
-import PaymentSystemsList from '../PaymentSystemsList'
-import Loader from './Loader'
+import {loadAllPaymentSystems} from '../../AC/paymentSystems'
+import PaymentSystemsList from './PaymentSystemsList'
+import Loader from '../Shared/Loader'
+import PropTypes from 'prop-types'
 
 class PaymentSystems extends Component {
 
@@ -58,8 +58,8 @@ class PaymentSystems extends Component {
 
 export default connect((state) => {
     return {
-        paymentSystems: filtratedPaymentSystemsSelector(state),
+        paymentSystems: state.paymentSystems.entities,
         loading: state.paymentSystems.loading,
         loaded: state.paymentSystems.loaded
     }
-}, {loadAllPaymentSystems})(accordion(PaymentSystems))
+}, {loadAllPaymentSystems})(PaymentSystems)

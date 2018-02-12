@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PaymentSystems from '../PaymentSystems/PaymentSystems'
 
 class Home extends Component {
 	render() {
@@ -7,70 +8,25 @@ class Home extends Component {
 			    <div className="container">
 			        <div className="row main-info-flex">
 			            <div className="col-md-7 col-md-offset-0 exchange-info">
-			                <div className="row">
-			                    <div className="col-md-6 col-sm-6">
-			                        <h4 className="mt0">Отправить </h4>
-			                        <div className="amount-container">
-			                        	<input type="text" name="amount-bar" placeholder="Сумма к отправке" className="amount-input" />
-			                        	<button className="btn btn-default amount-btn" type="button"> 
-			                        		<img src="assets/img/bitcoin.png" className="amount-btn-icon" />
-			                        	</button>
-			                        </div>
-			                        <h5 className="choose-payment-system">Choose Payment System</h5>
-			                        <div>
-			                        	<button className="btn btn-link border-pretty" type="button">
-			                        		<i className="icon ion-android-arrow-forward pull-right"></i>
-			                        		<img src="assets/img/bitcoin.png" />
-			                        		Bitcoin
-			                        	</button>
-			                        	<button className="btn btn-link border-pretty" type="button">
-			                        		<i className="icon ion-android-arrow-forward pull-right"></i>
-			                        		<img src="assets/img/bitcoin.png" />
-			                        		Ethereum
-			                        	</button>
-		                        	</div>
-			                    </div>
-			                    <div className="col-md-6 col-sm-6">
-			                        <h4 className="mt0">Получить </h4>
-			                        <div className="amount-container">
-			                        	<input type="text" name="amount-bar" placeholder="Сумма к получению" className="amount-input" />
-			                        	<button className="btn btn-default amount-btn" type="button"> 
-			                        		<img src="assets/img/bitcoin.png" className="amount-btn-icon" />
-			                        	</button>
-			                        </div>
-			                        <h5 className="choose-payment-system">Choose Payment System</h5>
-			                        <div>
-			                        	<button className="btn btn-link border-pretty" type="button">
-			                        		<i className="icon ion-android-arrow-forward pull-right"></i>
-			                        		<img src="assets/img/bitcoin.png" />
-			                        		Bitcoin
-			                        	</button>
-			                        	<button className="btn btn-link border-pretty" type="button">
-			                        		<i className="icon ion-android-arrow-forward pull-right"></i>
-			                        		<img src="assets/img/bitcoin.png" />
-			                        		Ethereum
-			                        	</button>
-		                        	</div>
-			                    </div>
-			                </div>
+			            	<PaymentSystems />
 			            </div>
 			            <div className="col-md-5 details-info">
 			                <h4 className="mt0">Details </h4>
 			                <form className="bootstrap-form-with-validation">
 			                    <div className="form-group">
-			                    	<label className="control-label" for="text-input">Text Input</label>
+			                    	<label className="control-label" htmlFor="text-input">Text Input</label>
 			                    	<input className="form-control" type="text" name="text-input" id="text-input" />
 			                    </div>
 			                    <div className="form-group">
-			                    	<label className="control-label" for="email-input">Email Input</label>
+			                    	<label className="control-label" htmlFor="email-input">Email Input</label>
 			                    	<input className="form-control" type="email" name="email-input" id="email-input" />
 			                    </div>
 			                    <div className="form-group">
-			                    	<label className="control-label" for="textarea-input">Textarea </label>
+			                    	<label className="control-label" htmlFor="textarea-input">Textarea </label>
 			                    	<textarea className="form-control" name="textarea-input" id="textarea-input"></textarea>
 			                    </div>
 			                    <div className="form-group">
-			                    	<label className="control-label" for="search-input">Input Group</label>
+			                    	<label className="control-label" htmlFor="search-input">Input Group</label>
 			                        <div className="input-group">
 			                        	<input className="form-control" type="search" name="search-input" id="search-input" />
 			                            <div className="input-group-addon">
@@ -80,7 +36,7 @@ class Home extends Component {
 			                    </div>
 			                    <div className="form-group">
 			                        <div className="checkbox">
-			                        	<label className="control-label" for="checkbox-input">
+			                        	<label className="control-label" htmlFor="checkbox-input">
 				                        	<input type="checkbox" name="checkbox-input" />
 				                        	I Agree with rules bla bla bla
 			                        	</label>
