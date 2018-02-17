@@ -1,9 +1,10 @@
 import {LOAD_ALL_PAYMENT_SYSTEMS, START, FAIL, SUCCESS} from "../constants"
+import {arrToMap} from "../helpers"
 
 const initialState = {
     loading: false,
     loaded: false,
-    entities: []
+    entities: {}
 }
 
 export default function(state = initialState, action = {}) {
@@ -21,9 +22,10 @@ export default function(state = initialState, action = {}) {
       }
     case LOAD_ALL_PAYMENT_SYSTEMS + SUCCESS:
       return {
+        ...state,
         loaded: true,
         loading: false,
-        entities: payload
+        entities: arrToMap(payload)
       }
     default:
       return state

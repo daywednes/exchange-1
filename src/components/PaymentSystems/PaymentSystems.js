@@ -3,7 +3,9 @@ import {connect} from 'react-redux'
 import {loadAllPaymentSystems} from '../../AC/paymentSystems'
 import PaymentSystemsList from './PaymentSystemsList'
 import Loader from '../Shared/Loader'
+import Amount from '../Amount/Amount'
 import PropTypes from 'prop-types'
+import {mapToArr} from "../../helpers"
 
 class PaymentSystems extends Component {
 
@@ -21,44 +23,50 @@ class PaymentSystems extends Component {
     }
 
 	render() {
-		const {loaded, loading, paymentSystems} = this.props
 
 		return (
-		    <div className="row">
-		        <div className="col-md-6 col-sm-6">
-		            <h4 className="mt0">Отправить </h4>
-		            <div className="amount-container">
-		            	<input type="text" name="amount-bar" placeholder="Сумма к отправке" className="amount-input" />
-		            	<button className="btn btn-default amount-btn" type="button"> 
-		            		<img src="assets/img/bitcoin.png" className="amount-btn-icon" />
-		            	</button>
-		            </div>
-		            <h5 className="choose-payment-system">Choose Payment System</h5>
-		            <div>
-		            	<PaymentSystemsList list={paymentSystems} />
-		        	</div>
-		        </div>
-		        <div className="col-md-6 col-sm-6">
-		            <h4 className="mt0">Получить </h4>
-		            <div className="amount-container">
-		            	<input type="text" name="amount-bar" placeholder="Сумма к получению" className="amount-input" />
-		            	<button className="btn btn-default amount-btn" type="button"> 
-		            		<img src="assets/img/bitcoin.png" className="amount-btn-icon" />
-		            	</button>
-		            </div>
-		            <h5 className="choose-payment-system">Choose Payment System</h5>
-		            <div>
-		            	<PaymentSystemsList list={paymentSystems} />
-		        	</div>
-		        </div>
+		    <div>
+		    	{this.getBody()}
 		    </div>
 		);
 	}
+
+	getBody() {
+		const {loaded, loading, paymentSystems} = this.props
+
+		if (!paymentSystems || loading) {
+			return (
+				<Loader />
+			)
+		} else {
+			return (
+				<div className="row">
+			        <div className="col-md-6 col-sm-6">
+			            <h4 className="mt0">Отправить</h4>
+			            <Amount type="from" />
+			            <h5 className="choose-payment-system">Choose Payment System</h5>
+			            <div>
+			            	<PaymentSystemsList list={paymentSystems} type="from" />
+			        	</div>
+			        </div>
+			        <div className="col-md-6 col-sm-6">
+			            <h4 className="mt0">Получить </h4>
+			            <Amount type="to" />
+			            <h5 className="choose-payment-system">Choose Payment System</h5>
+			            <div>
+			            	<PaymentSystemsList list={paymentSystems} type="to" />
+			        	</div>
+			        </div>
+			    </div>
+		    )
+		}
+	}
+
 }
 
 export default connect((state) => {
     return {
-        paymentSystems: state.paymentSystems.entities,
+        paymentSystems: mapToArr(state.paymentSystems.entities),
         loading: state.paymentSystems.loading,
         loaded: state.paymentSystems.loaded
     }
