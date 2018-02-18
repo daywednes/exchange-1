@@ -1,10 +1,13 @@
-import {TOGGLE_ACTIVE_CRYPTO, SET_AMOUNT_CRYPTO} from "../constants"
+import {TOGGLE_ACTIVE_CRYPTO, SET_AMOUNT_CRYPTO, LOAD_CRYPTO_PAIR, START, FAIL, SUCCESS} from "../constants"
 
 const initialState = {
     amount_from: null,
     amount_to: null,
     selected_from: null,
-    selected_to: null
+    selected_to: null,
+    loading_pair: false,
+    loaded_pair: false,
+    rate: {}
 }
 
 export default function(state = initialState, action = {}) {
@@ -20,6 +23,22 @@ export default function(state = initialState, action = {}) {
       return {
         ...state, 
         ['amount_' + payload.type ]: payload.amount
+      }
+    case LOAD_CRYPTO_PAIR + START:
+      return {
+       	...state,
+        loading_pair: true
+      }
+    case LOAD_CRYPTO_PAIR + FAIL:
+      return {
+       	...state
+      }
+    case LOAD_CRYPTO_PAIR + SUCCESS:
+      return {
+        ...state,
+        loaded_pair: true,
+        loading_pair: false,
+        rate: payload
       }
     default:
       return state

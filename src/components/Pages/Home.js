@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PaymentSystems from '../PaymentSystems/PaymentSystems'
+import DetailsExchange from '../Exchange/DetailsExchange'
 
 class Home extends Component {
 	render() {
@@ -11,46 +12,7 @@ class Home extends Component {
 			            	<PaymentSystems />
 			            </div>
 			            <div className="col-md-5 details-info">
-			                <h4 className="mt0">Details </h4>
-			                <form className="bootstrap-form-with-validation">
-			                    <div className="form-group">
-			                    	<label className="control-label" htmlFor="text-input">Text Input</label>
-			                    	<input className="form-control" type="text" name="text-input" id="text-input" />
-			                    </div>
-			                    <div className="form-group">
-			                    	<label className="control-label" htmlFor="email-input">Email Input</label>
-			                    	<input className="form-control" type="email" name="email-input" id="email-input" />
-			                    </div>
-			                    <div className="form-group">
-			                    	<label className="control-label" htmlFor="textarea-input">Textarea </label>
-			                    	<textarea className="form-control" name="textarea-input" id="textarea-input"></textarea>
-			                    </div>
-			                    <div className="form-group">
-			                    	<label className="control-label" htmlFor="search-input">Input Group</label>
-			                        <div className="input-group">
-			                        	<input className="form-control" type="search" name="search-input" id="search-input" />
-			                            <div className="input-group-addon">
-			                            	<span><i className="glyphicon glyphicon-bitcoin"></i></span>
-			                            </div>
-			                        </div>
-			                    </div>
-			                    <div className="form-group">
-			                        <div className="checkbox">
-			                        	<label className="control-label" htmlFor="checkbox-input">
-				                        	<input type="checkbox" name="checkbox-input" />
-				                        	I Agree with rules bla bla bla
-			                        	</label>
-			                       </div>
-			                    </div>
-			                </form>
-
-			                <button className="btn btn-primary" type="button">Make exchange</button>
-
-			                <div className="form-group">
-			                	<label className="control-label details-info-attention">Details </label>
-			                    <p className="form-static-control">Attention! In regard with the instability of Bitcoin's exchange rate, the amount you receive will be recalculated at the new exchange rate, if more than 10 minutes have passed from the inception of your order to the receipt of funds
-			                        on our account. Making the order confirms acceptance of this condition and User agreement. </p>
-			                </div>
+			            	<DetailsExchange />
 			            </div>
 			        </div>
 			        <div className="row">
