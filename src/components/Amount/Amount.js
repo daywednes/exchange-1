@@ -34,19 +34,14 @@ class Amount extends Component {
 	      amount: nextProps.exchangeInfo["amount_" + type] || ''
 	    })
 
-	    if (exchangeInfo.calculatingType) debugger;
+	    //if (exchangeInfo.calculatingType) debugger;
 
 		if (
 			exchangeInfo.calculatingType &&
-			exchangeInfo["amount_" + antiType] && 
-			!exchangeInfo.loading_pair &&
 			exchangeInfo.rate.rate &&
-			(
-				exchangeInfo.rate.rate != this.props.exchangeInfo.rate.rate || 
-				exchangeInfo["amount_" + antiType] != this.props.exchangeInfo["amount_" + antiType]
-			)
+			(type == "to" || exchangeInfo["amount_" + antiType] != this.props.exchangeInfo["amount_" + antiType])
 		) {
-			if (type == "from") {
+			if (type == "to") {
 				var value = exchangeInfo["amount_" + antiType] * exchangeInfo.rate.rate
 			} else {
 				var value = exchangeInfo["amount_" + antiType] / exchangeInfo.rate.rate

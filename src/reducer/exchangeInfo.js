@@ -7,6 +7,7 @@ const initialState = {
     selected_to: null,
     loading_pair: false,
     loaded_pair: false,
+    calculatingType: null,
     rate: {}
 }
 
@@ -28,11 +29,13 @@ export default function(state = initialState, action = {}) {
     case LOAD_CRYPTO_PAIR + START:
       return {
        	...state,
-        loading_pair: true
+        loading_pair: true,
+        calculatingType: null
       }
     case LOAD_CRYPTO_PAIR + FAIL:
       return {
-       	...state
+       	...state,
+        calculatingType: null
       }
     case LOAD_CRYPTO_PAIR + SUCCESS:
       return {
