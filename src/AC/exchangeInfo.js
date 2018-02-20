@@ -9,10 +9,10 @@ export function toggleActiveCrypto(id, type) {
     }
 }
 
-export function setAmountCrypto(amount, type) {
+export function setAmountCrypto(amount, type, calculating) {
     return {
         type: SET_AMOUNT_CRYPTO,
-        payload: { amount, type }
+        payload: { amount, type, calculating }
     }
 }
 export function loadCryptoPair(ratePair) {

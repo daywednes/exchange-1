@@ -30,16 +30,28 @@ class Amount extends Component {
 
 		const antiType = type == "from" ? "to" : "from"
 
+	    this.setState({
+	      amount: nextProps.exchangeInfo["amount_" + type] || ''
+	    })
+
+	    if (exchangeInfo.calculatingType) debugger;
+
 		if (
-			type == "to" && 
-			exchangeInfo.amount_from && 
+			exchangeInfo.calculatingType &&
+			exchangeInfo["amount_" + antiType] && 
+			!exchangeInfo.loading_pair &&
+			exchangeInfo.rate.rate &&
 			(
 				exchangeInfo.rate.rate != this.props.exchangeInfo.rate.rate || 
-				exchangeInfo.amount_from != this.props.exchangeInfo.amount_from
+				exchangeInfo["amount_" + antiType] != this.props.exchangeInfo["amount_" + antiType]
 			)
 		) {
-			var value2 = exchangeInfo["amount_from"] * exchangeInfo.rate.rate
-			this.changeAmount(value2+"")
+			if (type == "from") {
+				var value = exchangeInfo["amount_" + antiType] * exchangeInfo.rate.rate
+			} else {
+				var value = exchangeInfo["amount_" + antiType] / exchangeInfo.rate.rate
+			}
+			this.props.setAmountCrypto(value + "", this.props.type)
 		}
 
 		// if (
@@ -75,7 +87,6 @@ class Amount extends Component {
     shouldComponentUpdate(nextProps, nextState) {
     	const {exchangeInfo: {selected_from, selected_to, amount_from, amount_to, rate}} = nextProps
 
-		console.log("---", "shouldComponentUpdate Function call")
         return (
         	// selected_from != this.props.exchangeInfo.selected_from ||
         	// selected_to != this.props.exchangeInfo.selected_to ||
@@ -108,15 +119,7 @@ class Amount extends Component {
 	    const target = ev.target;
 	    const value = target.type === 'checkbox' ? target.checked : target.value;
 	    const name = target.name;
-	    this.changeAmount(value)
-    }
-
-    changeAmount(value) {
-	    this.setState({
-	      amount: value
-	    }, () => {
-	    	this.props.setAmountCrypto(value, this.props.type)
-	    });    	
+	    this.props.setAmountCrypto(value, this.props.type, true)
     }
 }
 

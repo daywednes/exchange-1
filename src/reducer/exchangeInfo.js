@@ -22,7 +22,8 @@ export default function(state = initialState, action = {}) {
     case SET_AMOUNT_CRYPTO:
       return {
         ...state, 
-        ['amount_' + payload.type ]: payload.amount
+        ['amount_' + payload.type ]: payload.amount,
+        calculatingType: (payload.calculating ? payload.type : null)
       }
     case LOAD_CRYPTO_PAIR + START:
       return {
@@ -38,6 +39,8 @@ export default function(state = initialState, action = {}) {
         ...state,
         loaded_pair: true,
         loading_pair: false,
+        amount_from: "1",
+        calculatingType: "from",
         rate: payload
       }
     default:

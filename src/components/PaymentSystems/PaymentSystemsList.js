@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from "react-redux"
 import PropTypes from 'prop-types'
 import toggleActive from '../../decorators/toggleActive'
-import {toggleActiveCrypto} from '../../AC/exchangeInfo'
+import {toggleActiveCrypto, setAmountCrypto} from '../../AC/exchangeInfo'
 
 class PaymentSystemsList extends Component {
 	static propTypes = {
@@ -59,4 +59,4 @@ export default connect((state) => {
 		selected_from: state.exchangeInfo.selected_from,
 		selected_to: state.exchangeInfo.selected_to
 	}
-}, { toggleActiveCrypto })(PaymentSystemsList)
+}, { toggleActiveCrypto, setAmountCrypto })(PaymentSystemsList)
