@@ -96,7 +96,7 @@ class Amount extends Component {
 		var selected_id = type == "from" ? selected_from : selected_to
 		if (selected_id) {
 			var paymentSystem = paymentSystemsMap[selected_id]
-			var pic = "https://shapeshift.io/images/coins/" + paymentSystem.Name.toLowerCase() + ".png"
+			var pic = paymentSystem.imageSmall
 		}
 		return (
 			<div>

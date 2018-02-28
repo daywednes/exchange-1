@@ -19,11 +19,10 @@ class PaymentSystemsList extends Component {
 		const {list, type, activeItemId} = this.props
 
 		const paymentSystems = list.map(paymentSystem => {
-			const pic = "https://shapeshift.io/images/coins/" + paymentSystem.Name.toLowerCase() + ".png"
 			return (
 	        	<button className={this.getClassName(paymentSystem.ID)} disabled={this.getDisabled(paymentSystem.ID)} type="button" key={paymentSystem.ID} onClick={this.toggleClick(paymentSystem.ID, type)}>
 	        		<i className="icon ion-android-arrow-forward pull-right"></i>
-	        		<img src={pic} />
+	        		<img src={paymentSystem.imageSmall.replace("jpeg", "png")} />
 	        		{paymentSystem.Name}
 	        	</button>
 			)

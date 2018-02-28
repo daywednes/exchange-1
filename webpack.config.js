@@ -16,7 +16,8 @@ module.exports = {
             path: '/api/',
             target: config.server,
             changeOrigin: true
-        }]
+        }],
+        historyApiFallback: true
     },    
     module: {
         loaders: [
