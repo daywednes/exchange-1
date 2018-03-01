@@ -11,6 +11,7 @@ class Main extends Component {
 			<div>
 				<Switch>
 					<Route path="/" exact component={Home} />
+					<Route path="/btc-to-eos" component={Home} />
 					<Route path="/how-to-start" component={HowToStart} />
 					<Route path="/reviews" component={Reviews} />
 					<Route path="/news" component={News} />
