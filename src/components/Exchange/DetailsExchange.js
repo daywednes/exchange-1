@@ -8,8 +8,8 @@ class DetailsExchange extends Component {
 	static propTypes = {
         //from connect
         exchangeInfo: PropTypes.shape({
-	        selected_from: PropTypes.number,
-	        selected_to: PropTypes.number,
+	        selected_from: PropTypes.string,
+	        selected_to: PropTypes.string,
 	        amount_from: PropTypes.string,
 	        amount_to: PropTypes.string,
 	        loaded_pair: PropTypes.bool.isRequired,
@@ -36,16 +36,17 @@ class DetailsExchange extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-    	const {exchangeInfo: {selected_from, selected_to, amount_from, amount_to, loaded_pair, loading_pair}} = nextProps
+  //   	const {exchangeInfo: {selected_from, selected_to, amount_from, amount_to, loaded_pair, loading_pair}, paymentSystemsMap} = nextProps
 
-		console.log("---", "shouldComponentUpdate Function call")
-        return (selected_from != this.props.exchangeInfo.selected_from ||
-        	selected_to != this.props.exchangeInfo.selected_to ||
-        	amount_from != this.props.exchangeInfo.amount_from ||
-        	amount_to != this.props.exchangeInfo.amount_to ||
-        	loaded_pair != this.props.exchangeInfo.loaded_pair ||
-        	loading_pair != this.props.exchangeInfo.loading_pair 
-    	)
+		// console.log("---", "shouldComponentUpdate Function call")
+  //       return (selected_from != this.props.exchangeInfo.selected_from ||
+  //       	selected_to != this.props.exchangeInfo.selected_to ||
+  //       	amount_from != this.props.exchangeInfo.amount_from ||
+  //       	amount_to != this.props.exchangeInfo.amount_to ||
+  //       	loaded_pair != this.props.exchangeInfo.loaded_pair ||
+  //       	loading_pair != this.props.exchangeInfo.loading_pair 
+  //   	)
+        return true
     }
 
 	render() {
@@ -57,9 +58,16 @@ class DetailsExchange extends Component {
 	}
 
 	getBody() {
-		const {exchangeInfo: {selected_from, selected_to, amount_from, amount_to}, paymentSystemsMap} = this.props
-		var cryptoFrom = paymentSystemsMap[selected_from]
-		var cryptoTo = paymentSystemsMap[selected_to]
+		const {exchangeInfo: {selected_from, selected_to, amount_from, amount_to}, paymentSystemsMap, currencyFrom, currencyTo} = this.props
+        if (currencyFrom && currencyTo) {
+            var cryptoFrom = paymentSystemsMap[currencyFrom.toUpperCase()]
+            var cryptoTo = paymentSystemsMap[currencyTo.toUpperCase()]
+            if (!cryptoFrom || !cryptoTo) return null
+        } else {
+            var cryptoFrom = paymentSystemsMap[selected_from]
+            var cryptoTo = paymentSystemsMap[selected_to]
+        }
+
 
 		if (!cryptoFrom) {
 			return (

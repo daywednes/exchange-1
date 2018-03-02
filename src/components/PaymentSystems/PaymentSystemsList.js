@@ -7,20 +7,30 @@ import {toggleActiveCrypto, setAmountCrypto} from '../../AC/exchangeInfo'
 class PaymentSystemsList extends Component {
 	static propTypes = {
         //from connect
-        selected_from: PropTypes.number,
-        selected_to: PropTypes.number,
+        selected_from: PropTypes.string,
+        selected_to: PropTypes.string,
         toggleActiveCrypto: PropTypes.func.isRequired,
+        loadedPaymentSystems: PropTypes.bool.isRequired,
         // from attrs
         type: PropTypes.string.isRequired,
-        list: PropTypes.array.isRequired
+        list: PropTypes.array.isRequired,
+        selected: PropTypes.string
 	}
+
+    componentDidMount() {
+        const {selected, type, loadedPaymentSystems} = this.props
+		if (selected && loadedPaymentSystems) {
+			this.props.toggleActiveCrypto(selected, type)
+		}
+    }
 
 	render() {
 		const {list, type, activeItemId} = this.props
 
 		const paymentSystems = list.map(paymentSystem => {
+			''
 			return (
-	        	<button className={this.getClassName(paymentSystem.ID)} disabled={this.getDisabled(paymentSystem.ID)} type="button" key={paymentSystem.ID} onClick={this.toggleClick(paymentSystem.ID, type)}>
+	        	<button className={this.getClassName(paymentSystem.Symbol)} disabled={this.getDisabled(paymentSystem.Symbol)} type="button" key={paymentSystem.Symbol} onClick={this.toggleClick(paymentSystem.Symbol, type)}>
 	        		<i className="icon ion-android-arrow-forward pull-right"></i>
 	        		<img src={paymentSystem.imageSmall.replace("jpeg", "png")} />
 	        		{paymentSystem.Name}
@@ -35,8 +45,8 @@ class PaymentSystemsList extends Component {
 		);
 	}
 
-	toggleClick = (id, type) => ev =>  {
-		this.props.toggleActiveCrypto(id, type)
+	toggleClick = (symbol, type) => ev =>  {
+		this.props.toggleActiveCrypto(symbol, type)
 	}
 
 	getClassName(paymentSystemID) {
@@ -56,6 +66,7 @@ class PaymentSystemsList extends Component {
 export default connect((state) => {
 	return {
 		selected_from: state.exchangeInfo.selected_from,
-		selected_to: state.exchangeInfo.selected_to
+		selected_to: state.exchangeInfo.selected_to,
+        loadedPaymentSystems: state.paymentSystems.loaded
 	}
 }, { toggleActiveCrypto, setAmountCrypto })(PaymentSystemsList)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PaymentSystems from '../PaymentSystems/PaymentSystems'
-import Change from '../routes/Change'
+import PaymentSystems from '../routes/PaymentSystems'
+import DetailsExchange from '../Exchange/DetailsExchange'
 
 class Home extends Component {
 	render() {
@@ -12,7 +12,7 @@ class Home extends Component {
 			            	<PaymentSystems />
 			            </div>
 			            <div className="col-md-5 details-info">
-			            	<Change />
+			            	<DetailsExchange />
 			            </div>
 			        </div>
 			        <div className="row">

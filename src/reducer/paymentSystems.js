@@ -25,7 +25,7 @@ export default function(state = initialState, action = {}) {
         ...state,
         loaded: true,
         loading: false,
-        entities: arrToMap(payload)
+        entities: arrToMap(payload, "Symbol")
       }
     default:
       return state

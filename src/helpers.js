@@ -1,7 +1,6 @@
-export function arrToMap(arr) {
+export function arrToMap(arr, key) {
     return arr.reduce((acc, item) => {
-    	const id = item.id || item.ID || item.Id
-        acc[id] = item
+        acc[item[key]] = item
         return acc
     }, {})
 }

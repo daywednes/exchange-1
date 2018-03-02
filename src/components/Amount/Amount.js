@@ -9,8 +9,8 @@ class Amount extends Component {
         //from connect
         paymentSystemsMap: PropTypes.object.isRequired,
         exchangeInfo: PropTypes.shape({
-	        selected_from: PropTypes.number,
-	        selected_to: PropTypes.number,
+	        selected_from: PropTypes.string,
+	        selected_to: PropTypes.string,
 	        amount_from: PropTypes.string,
 	        amount_to: PropTypes.string,
 	        loaded_pair: PropTypes.bool.isRequired,

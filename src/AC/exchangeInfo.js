@@ -2,10 +2,10 @@ import axios from 'axios'
 import { TOGGLE_ACTIVE_CRYPTO, SET_AMOUNT_CRYPTO, LOAD_CRYPTO_PAIR, START, SUCCESS, FAIL } from '../constants'
 import querystring from 'querystring';
 
-export function toggleActiveCrypto(id, type) {
+export function toggleActiveCrypto(symbol, type) {
     return {
         type: TOGGLE_ACTIVE_CRYPTO,
-        payload: { id, type }
+        payload: { symbol: symbol.toUpperCase(), type }
     }
 }
 

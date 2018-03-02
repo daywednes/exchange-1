@@ -18,7 +18,7 @@ export default function(state = initialState, action = {}) {
     case TOGGLE_ACTIVE_CRYPTO:
       return {
         ...state, 
-        ['selected_' + payload.type ]: payload.id
+        ['selected_' + payload.type ]: payload.symbol
       }
     case SET_AMOUNT_CRYPTO:
       return {

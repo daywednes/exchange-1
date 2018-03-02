@@ -11,8 +11,8 @@ class Main extends Component {
 			<div>
 				<Switch>
 					<Route path="/" exact component={Home} />
-					<Route path="/btc-to-eos" component={Home} />
 					<Route path="/how-to-start" component={HowToStart} />
+					<Route path="/:currencyFrom(\w+)-to-:currencyTo(\w+)" component={Home} />
 					<Route path="/reviews" component={Reviews} />
 					<Route path="/news" component={News} />
 					<Route render={() => <h1 className="container text-center">Page not found</h1>}/>

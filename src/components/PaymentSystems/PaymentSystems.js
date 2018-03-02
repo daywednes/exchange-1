@@ -15,13 +15,14 @@ class PaymentSystems extends Component {
         loading: PropTypes.bool.isRequired,
         loaded: PropTypes.bool.isRequired,
         loadAllPaymentSystems: PropTypes.func.isRequired
+
 	}
 
     componentDidMount() {
         const {loaded, loading, loadAllPaymentSystems} = this.props
         if (!loaded || !loading) loadAllPaymentSystems()
     }
-
+    
 	render() {
 
 		return (
@@ -32,7 +33,7 @@ class PaymentSystems extends Component {
 	}
 
 	getBody() {
-		const {loaded, loading, paymentSystems} = this.props
+		const {loaded, loading, paymentSystems, currencyFrom, currencyTo} = this.props
 
 		if (!paymentSystems || loading) {
 			return (
@@ -46,7 +47,7 @@ class PaymentSystems extends Component {
 			            <Amount type="from" />
 			            <h5 className="choose-payment-system">Choose Payment System</h5>
 			            <div>
-			            	<PaymentSystemsList list={paymentSystems} type="from" />
+			            	<PaymentSystemsList list={paymentSystems} type="from" selected={currencyFrom} />
 			        	</div>
 			        </div>
 			        <div className="col-md-6 col-sm-6">
@@ -54,7 +55,7 @@ class PaymentSystems extends Component {
 			            <Amount type="to" />
 			            <h5 className="choose-payment-system">Choose Payment System</h5>
 			            <div>
-			            	<PaymentSystemsList list={paymentSystems} type="to" />
+			            	<PaymentSystemsList list={paymentSystems} type="to" selected={currencyTo} />
 			        	</div>
 			        </div>
 			    </div>
