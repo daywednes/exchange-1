@@ -30,23 +30,23 @@ class DetailsExchange extends Component {
         if (selected_from && selected_to) {
 			var cryptoFrom = paymentSystemsMap[selected_from]
 			var cryptoTo = paymentSystemsMap[selected_to]
-			console.log("---", "loadCryptoPair Function call")
         	loadCryptoPair(cryptoFrom.Symbol + "_" + cryptoTo.Symbol)
+            const url = selected_from.toLowerCase() + "-to-" + selected_to .toLowerCase()
+            window.history.pushState(url, url, '/' + url);
         }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-  //   	const {exchangeInfo: {selected_from, selected_to, amount_from, amount_to, loaded_pair, loading_pair}, paymentSystemsMap} = nextProps
+    	const {exchangeInfo: {selected_from, selected_to, amount_from, amount_to, loaded_pair, loading_pair}, paymentSystemsMap} = nextProps
 
-		// console.log("---", "shouldComponentUpdate Function call")
-  //       return (selected_from != this.props.exchangeInfo.selected_from ||
-  //       	selected_to != this.props.exchangeInfo.selected_to ||
-  //       	amount_from != this.props.exchangeInfo.amount_from ||
-  //       	amount_to != this.props.exchangeInfo.amount_to ||
-  //       	loaded_pair != this.props.exchangeInfo.loaded_pair ||
-  //       	loading_pair != this.props.exchangeInfo.loading_pair 
-  //   	)
-        return true
+		console.log("---", "shouldComponentUpdate Function call")
+        return (selected_from != this.props.exchangeInfo.selected_from ||
+        	selected_to != this.props.exchangeInfo.selected_to ||
+        	amount_from != this.props.exchangeInfo.amount_from ||
+        	amount_to != this.props.exchangeInfo.amount_to ||
+        	loaded_pair != this.props.exchangeInfo.loaded_pair ||
+        	loading_pair != this.props.exchangeInfo.loading_pair 
+    	)
     }
 
 	render() {
@@ -84,14 +84,6 @@ class DetailsExchange extends Component {
 				</div>
 			)
 		}
-
-		// if (!amount_from && !amount_to) {
-		// 	return (
-		// 		<div>
-		// 			Need to enter amount
-		// 		</div>
-		// 	)
-		// }
 
 		return (
 			<div>
