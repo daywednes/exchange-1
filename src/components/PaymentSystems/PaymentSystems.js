@@ -33,7 +33,7 @@ class PaymentSystems extends Component {
 	}
 
 	getBody() {
-		const {loaded, loading, paymentSystems, currencyFrom, currencyTo} = this.props
+		const {loaded, loading, paymentSystems, currencyFrom, currencyTo, history} = this.props
 
 		if (!paymentSystems || loading) {
 			return (
@@ -47,7 +47,7 @@ class PaymentSystems extends Component {
 			            <Amount type="from" />
 			            <h5 className="choose-payment-system">Choose Payment System</h5>
 			            <div>
-			            	<PaymentSystemsList list={paymentSystems} type="from" selected={currencyFrom} />
+			            	<PaymentSystemsList list={paymentSystems} type="from" selected={currencyFrom} history={history} />
 			        	</div>
 			        </div>
 			        <div className="col-md-6 col-sm-6">
@@ -55,7 +55,7 @@ class PaymentSystems extends Component {
 			            <Amount type="to" />
 			            <h5 className="choose-payment-system">Choose Payment System</h5>
 			            <div>
-			            	<PaymentSystemsList list={paymentSystems} type="to" selected={currencyTo} />
+			            	<PaymentSystemsList list={paymentSystems} type="to" selected={currencyTo} history={history} />
 			        	</div>
 			        </div>
 			    </div>

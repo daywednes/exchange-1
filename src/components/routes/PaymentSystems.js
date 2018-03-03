@@ -12,8 +12,8 @@ class Change extends Component {
 		);
 	}
 
-	getPaymentSystems = ({match}) => {
-		return <PaymentSystems {...match.params} />
+	getPaymentSystems = ({match, history}) => {
+		return <PaymentSystems {...match.params} history={history} />
 	}
 }
 

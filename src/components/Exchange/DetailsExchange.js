@@ -31,8 +31,8 @@ class DetailsExchange extends Component {
 			var cryptoFrom = paymentSystemsMap[selected_from]
 			var cryptoTo = paymentSystemsMap[selected_to]
         	loadCryptoPair(cryptoFrom.Symbol + "_" + cryptoTo.Symbol)
-            const url = selected_from.toLowerCase() + "-to-" + selected_to .toLowerCase()
-            window.history.pushState(url, url, '/' + url);
+            // const url = selected_from.toLowerCase() + "-to-" + selected_to .toLowerCase()
+            // window.history.pushState(url, url, '/' + url);
         }
     }
 
