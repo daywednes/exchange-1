@@ -24,6 +24,24 @@ class PaymentSystemsList extends Component {
 		}
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+    	const {loadedPaymentSystems, selected_from, selected_to} = nextProps
+
+        return (selected_from != this.props.selected_from ||
+        	selected_to != this.props.selected_to ||
+        	loadedPaymentSystems != this.props.loadedPaymentSystems
+    	)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {selected, type, loadedPaymentSystems} = nextProps
+
+		if (this.props.selected != nextProps.selected && loadedPaymentSystems) {
+			this.props.toggleActiveCrypto(selected, type)
+		}
+    }
+
+
 	render() {
 		const {list, type, activeItemId} = this.props
 
@@ -46,7 +64,16 @@ class PaymentSystemsList extends Component {
 	}
 
 	toggleClick = (symbol, type) => ev =>  {
-		this.props.toggleActiveCrypto(symbol, type)
+		var selected = {
+			from: this.props.selected_from,
+			to: this.props.selected_to,
+		}
+		selected[type] = symbol
+		if (selected.from && selected.to) {
+			this.props.history.push(selected.from.toLowerCase() + "-to-" + selected.to.toLowerCase())
+		} else {
+			this.props.toggleActiveCrypto(symbol, type)
+		}
 	}
 
 	getClassName(paymentSystemID) {

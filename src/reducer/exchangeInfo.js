@@ -1,4 +1,4 @@
-import {TOGGLE_ACTIVE_CRYPTO, SET_AMOUNT_CRYPTO, LOAD_CRYPTO_PAIR, START, FAIL, SUCCESS} from "../constants"
+import {TOGGLE_ACTIVE_CRYPTO, SET_AMOUNT_CRYPTO, LOAD_CRYPTO_PAIR, CREATE_TRANSACTION, START, FAIL, SUCCESS} from "../constants"
 
 const initialState = {
     amount_from: null,
@@ -8,6 +8,9 @@ const initialState = {
     loading_pair: false,
     loaded_pair: false,
     calculatingType: null,
+    loaded_transaction: false,
+    loading_transaction: false,
+    transaction: {},
     rate: {}
 }
 
@@ -28,13 +31,13 @@ export default function(state = initialState, action = {}) {
       }
     case LOAD_CRYPTO_PAIR + START:
       return {
-       	...state,
+        ...state,
         loading_pair: true,
         calculatingType: null
       }
     case LOAD_CRYPTO_PAIR + FAIL:
       return {
-       	...state,
+        ...state,
         calculatingType: null
       }
     case LOAD_CRYPTO_PAIR + SUCCESS:
@@ -45,6 +48,22 @@ export default function(state = initialState, action = {}) {
         amount_from: "1",
         calculatingType: "from",
         rate: payload
+      }
+    case CREATE_TRANSACTION + START:
+      return {
+       	...state,
+        loading_transaction: true
+      }
+    case CREATE_TRANSACTION + FAIL:
+      return {
+       	...state
+      }
+    case CREATE_TRANSACTION + SUCCESS:
+      return {
+        ...state,
+        loaded_transaction: true,
+        loading_transaction: false,
+        transaction: payload
       }
     default:
       return state

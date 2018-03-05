@@ -6,14 +6,31 @@ class Change extends Component {
 	render() {
 		return (
 			<div>
-				<Route path="/" exact component={PaymentSystems} />
-				<Route path="/:currencyFrom(\w+)-to-:currencyTo(\w+)" render={this.getPaymentSystems} />
+				<Route path="/" render={this.getPaymentSystems} />
+				
 			</div>
 		);
 	}
 
-	getPaymentSystems = ({match, history}) => {
-		return <PaymentSystems {...match.params} history={history} />
+	getPaymentSystems = (props) => {
+		const {match, history, location} = props;
+		// if (match.params.currencyFrom && match.params.currencyTo) {
+
+		// }
+		//<Route path={`${match.url}/:topicId`} component={Topic}/>
+		const regex = /(\w+)-to-(\w+)/g
+		const found = regex.exec(location.pathname);
+		if (found && found.length >= 2) {
+			var params = {
+				currencyFrom: found[1],
+				currencyTo: found[2]
+			}
+			return <PaymentSystems {...params} history={history} />
+		} else {
+			
+			return <PaymentSystems {...match.params} history={history} />
+		}
+		
 	}
 }
 

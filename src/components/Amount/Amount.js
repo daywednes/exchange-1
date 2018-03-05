@@ -38,45 +38,19 @@ class Amount extends Component {
 
 		if (
 			exchangeInfo.calculatingType &&
-			exchangeInfo.rate.rate &&
 			(type == "to" || exchangeInfo["amount_" + antiType] != this.props.exchangeInfo["amount_" + antiType])
 		) {
-			if (type == "to") {
-				var value = exchangeInfo["amount_" + antiType] * exchangeInfo.rate.rate
-			} else {
-				var value = exchangeInfo["amount_" + antiType] / exchangeInfo.rate.rate
+			if (exchangeInfo.rate.rate == 0) {
+				this.props.setAmountCrypto("0", this.props.type)
+			} else if (exchangeInfo.rate.rate) {
+				if (type == "to") {
+					var value = exchangeInfo["amount_" + antiType] * exchangeInfo.rate.rate
+				} else {
+					var value = exchangeInfo["amount_" + antiType] / exchangeInfo.rate.rate
+				}
+				this.props.setAmountCrypto(value + "", this.props.type)
 			}
-			this.props.setAmountCrypto(value + "", this.props.type)
 		}
-
-		// if (
-		// 	type == "from" && 
-		// 	exchangeInfo.amount_to && 
-		// 	(
-		// 		exchangeInfo.rate.rate != this.props.exchangeInfo.rate.rate || 
-		// 		exchangeInfo.amount_to != this.props.exchangeInfo.amount_to
-		// 	)
-		// ) {
-		// 	var value2 = exchangeInfo["amount_to"] * exchangeInfo.rate.rate
-		// 	this.changeAmount(value2+"")
-		// }
-
-		// if (exchangeInfo["amount_" + type] !== this.props.exchangeInfo["amount_" + type]) {
-		//     this.setState({
-		//       amount: exchangeInfo["amount_" + type]
-		//     })
-
-		// 	if (exchangeInfo.rate.rate) {
-		// 		var value2 = exchangeInfo["amount_" + type] * exchangeInfo.rate.rate
-		// 		this.props.setAmountCrypto(value2 + "", antiType)
-		// 	}
-		// }
-
-
-		// if (rate.rate) {
-		// 	var value2 = value * rate.rate
-		// 	this.props.setAmountCrypto(value2 + "", antiType)
-		// }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -96,7 +70,7 @@ class Amount extends Component {
 		var selected_id = type == "from" ? selected_from : selected_to
 		if (selected_id) {
 			var paymentSystem = paymentSystemsMap[selected_id]
-			var pic = paymentSystem.imageSmall
+			var pic = paymentSystem.imageSmall.replace("jpeg", "png")
 		}
 		return (
 			<div>

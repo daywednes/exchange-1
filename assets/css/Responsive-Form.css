@@ -6,3 +6,11 @@
   box-shadow:0 0 16px rgba(81, 203, 238, 1);
 }
 
+
+.crypto-details-images {
+	margin: 20px auto 10px;
+}
+.crypto-details-images .fa {
+	font-size: 30px;
+	padding: 0 10px;
+}
