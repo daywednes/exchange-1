@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline",
+    "start": "concurrently \"npm run dev\" \"npm run api\"",
+    "api": "node server/index.js",
+    "dev": "webpack-dev-server --hot --inline",
     "build": "SET NODE_ENV=production & webpack"
   },
   "repository": {
@@ -24,16 +26,18 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.5.0",
+    "concurrently": "^3.5.0",
     "webpack": "^2.0.0",
     "webpack-dev-server": "^2.0.0"
   },
   "dependencies": {
     "axios": "^0.17.1",
     "css-loader": "^0.28.9",
+    "express": "^4.16.2",
     "jwt-decode": "^2.2.0",
     "prop-types": "^15.6.0",
     "react": "^15.5.0",
-    "react-dom": "^15.5.0",
+    "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",

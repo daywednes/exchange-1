@@ -8,6 +8,8 @@ const enhancer = applyMiddleware(thunk, logger)
 const store = createStore(reducer, {}, enhancer)
 
 //dev only
-window.store = store
+if(typeof window !== 'undefined') {
+	window.store = store
+}
 
 export default store
