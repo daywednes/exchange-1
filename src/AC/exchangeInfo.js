@@ -34,7 +34,7 @@ export function loadCryptoPair(ratePair) {
         } else {
             dispatch({
                 type: LOAD_CRYPTO_PAIR + FAIL,
-                errorMessage: Errors
+                errorMessage: Errors[0]
             })
         }
     })
@@ -65,7 +65,7 @@ export function createTransaction(transaction) {
         } else {
             dispatch({
                 type: CREATE_TRANSACTION + FAIL,
-                errorMessage: Errors
+                errorMessage: Errors[0]
             })
         }
     })

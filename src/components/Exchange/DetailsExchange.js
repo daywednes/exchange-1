@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import {loadCryptoPair} from '../../AC/exchangeInfo'
 import FormExchange from './FormExchange'
+import _ from 'lodash'
 
 class DetailsExchange extends Component {
 
@@ -15,9 +16,12 @@ class DetailsExchange extends Component {
 	        amount_to: PropTypes.string,
 	        loaded_pair: PropTypes.bool.isRequired,
 	        loading_pair: PropTypes.bool.isRequired,
-	        rate: PropTypes.object.isRequired
+	        rate: PropTypes.object.isRequired,
+            loaded_transaction: PropTypes.bool.isRequired,
+            loading_transaction: PropTypes.bool.isRequired,
+            transactionError: PropTypes.string,
+            transactionData: PropTypes.object,            
         }).isRequired,
-        paymentSystemsMap: PropTypes.object.isRequired,
 
         //from route
         currencyFrom: PropTypes.string,
@@ -41,14 +45,10 @@ class DetailsExchange extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        const {exchangeInfo: {selected_from, selected_to, amount_from, amount_to, loaded_pair, loading_pair}, paymentSystemsMap} = nextProps
+        const {exchangeInfo, paymentSystemsMap} = nextProps
 
-        return (selected_from != this.props.exchangeInfo.selected_from ||
-        	selected_to != this.props.exchangeInfo.selected_to ||
-        	amount_from != this.props.exchangeInfo.amount_from ||
-        	amount_to != this.props.exchangeInfo.amount_to ||
-        	loaded_pair != this.props.exchangeInfo.loaded_pair ||
-        	loading_pair != this.props.exchangeInfo.loading_pair
+        return (
+            !_.isEqual(exchangeInfo, this.props.exchangeInfo)
     	)
     }
 
@@ -61,7 +61,7 @@ class DetailsExchange extends Component {
 	}
 
 	getBody() {
-		const {exchangeInfo: {selected_from, selected_to, amount_from, amount_to}, paymentSystemsMap, currencyFrom, currencyTo} = this.props
+		const {exchangeInfo: {selected_from, selected_to, amount_from, amount_to, rate}, paymentSystemsMap, currencyFrom, currencyTo} = this.props
         if (currencyFrom && currencyTo) {
             var cryptoFrom = paymentSystemsMap[currencyFrom.toUpperCase()]
             var cryptoTo = paymentSystemsMap[currencyTo.toUpperCase()]
@@ -107,7 +107,7 @@ class DetailsExchange extends Component {
                     </tbody>
                 </table>
                 
-                <FormExchange cryptoTo={cryptoTo} cryptoFrom={cryptoFrom} />
+                <FormExchange cryptoTo={cryptoTo} cryptoFrom={cryptoFrom} exchangeInfo={this.props.exchangeInfo} />
                 <br />
                 <p>Attention! In regard with the instability of Bitcoin's exchange rate, the amount you receive will be recalculated at the new exchange rate, if more than 10 minutes have passed from the inception of your order to the receipt of funds
                         on our account. Making the order confirms acceptance of this condition and User agreement. </p>

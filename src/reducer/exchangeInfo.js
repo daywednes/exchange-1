@@ -10,7 +10,8 @@ const initialState = {
     calculatingType: null,
     loaded_transaction: false,
     loading_transaction: false,
-    transaction: {},
+    transactionError: null,
+    transactionData: {},
     rate: {}
 }
 
@@ -21,7 +22,8 @@ export default function(state = initialState, action = {}) {
     case TOGGLE_ACTIVE_CRYPTO:
       return {
         ...state, 
-        ['selected_' + payload.type ]: payload.symbol
+        ['selected_' + payload.type ]: payload.symbol,
+        transactionError: null
       }
     case SET_AMOUNT_CRYPTO:
       return {
@@ -38,7 +40,8 @@ export default function(state = initialState, action = {}) {
     case LOAD_CRYPTO_PAIR + FAIL:
       return {
         ...state,
-        calculatingType: null
+        calculatingType: null,
+        errorMessage
       }
     case LOAD_CRYPTO_PAIR + SUCCESS:
       return {
@@ -52,18 +55,21 @@ export default function(state = initialState, action = {}) {
     case CREATE_TRANSACTION + START:
       return {
        	...state,
-        loading_transaction: true
+        loading_transaction: true,
+        transactionError: null
       }
     case CREATE_TRANSACTION + FAIL:
       return {
-       	...state
+       	...state,
+        loading_transaction: false,
+        transactionError: errorMessage
       }
     case CREATE_TRANSACTION + SUCCESS:
       return {
         ...state,
         loaded_transaction: true,
         loading_transaction: false,
-        transaction: payload
+        transactionData: payload
       }
     default:
       return state

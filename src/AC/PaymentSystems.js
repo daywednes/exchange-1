@@ -18,7 +18,7 @@ export function loadAllPaymentSystems() {
         } else {
             dispatch({
                 type: LOAD_ALL_PAYMENT_SYSTEMS + FAIL,
-                errorMessage: Errors
+                errorMessage: Errors[0]
             })
         }
     })
