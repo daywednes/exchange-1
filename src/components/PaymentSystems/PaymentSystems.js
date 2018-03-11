@@ -19,8 +19,8 @@ class PaymentSystems extends Component {
 	}
 
     componentDidMount() {
-        const {loaded, loading, loadAllPaymentSystems} = this.props
-        if (!loaded || !loading) loadAllPaymentSystems()
+        const {loaded, loading, paymentSystems, loadAllPaymentSystems} = this.props
+        if (!loading && paymentSystems.length == 0) loadAllPaymentSystems()
     }
     
 	render() {

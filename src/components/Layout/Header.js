@@ -6,7 +6,9 @@ class Header extends Component {
 		return (
 			<nav className="navbar navbar-default">
 			    <div className="container">
-			        <div className="navbar-header"><a className="navbar-brand" href="/">XcoinMAN </a><button className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span className="sr-only">Toggle navigation</span><span className="icon-bar"></span><span className="icon-bar"></span><span className="icon-bar"></span></button></div>
+			        <div className="navbar-header">
+			        	<NavLink activeStyle={{color: '#336699'}} className="navbar-brand" exact to='/'>XcoinMAN</NavLink>
+			        	<button className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span className="sr-only">Toggle navigation</span><span className="icon-bar"></span><span className="icon-bar"></span><span className="icon-bar"></span></button></div>
 			        <div
 			            className="collapse navbar-collapse" id="navcol-1">
 			            <ul className="nav navbar-nav">
