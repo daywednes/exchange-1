@@ -18,9 +18,9 @@ class FormExchange extends Component {
     }
 
     state = {
-        Wallet: "0xcbb82560eca40a4e8f1b07e6c33f89aa23eb7345",
+        Wallet: "0x5c5d974403fdfa7e22cb6479aaf0883657eb43f7",
         RefundWallet: "1CsiaRj1GA4vM4GJ1CDTafA8PdXRZMvLx2",
-        Email: "anstak@gmail.com",
+        Email: "example@gmail.com",
         AgreeRules: false,
         Errors: {}
     }
