@@ -40,3 +40,16 @@
   max-height: 0;
   transition: max-height 400ms ease-in;
 }
+
+.loader-container {
+	position: relative;
+}
+
+.loader-container .loader-abs {
+	position: absolute;
+	left: -15px;
+	top:-10px;
+	right: -15px;
+	bottom: -10px;
+    background: rgba(0,0,0,0.15);
+}

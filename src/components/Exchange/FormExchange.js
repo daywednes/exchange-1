@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import {createTransaction} from '../../AC/exchangeInfo'
 import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
+import Loader from '../Shared/Loader'
+import {Redirect} from 'react-router-dom'
 
 class FormExchange extends Component {
     static propTypes = {
@@ -16,39 +18,50 @@ class FormExchange extends Component {
     }
 
     state = {
-        Wallet: "",
-        RefundWallet: "",
-        Email: "",
+        Wallet: "0xcbb82560eca40a4e8f1b07e6c33f89aa23eb7345",
+        RefundWallet: "1CsiaRj1GA4vM4GJ1CDTafA8PdXRZMvLx2",
+        Email: "anstak@gmail.com",
         AgreeRules: false,
         Errors: {}
     }
 
 	render() {
-		const {cryptoTo, cryptoFrom, exchangeInfo: { transactionError, loading_transaction, loaded_transaction }} = this.props
+		const {cryptoTo, cryptoFrom, exchangeInfo: { transactionError, loading_transaction, loaded_transaction, transactionData }} = this.props
+        var loader = null
+        if (loading_transaction) {
+            var loader = <div className="loader-abs"><Loader /></div>
+        }
+
+        if (transactionData.ID) {
+            return <Redirect push to={"/txid/" + transactionData.ID} />
+        }
 
 		return (
 			<div>
                 <form onSubmit = {this.handleSubmit} className="bootstrap-form-with-validation">
                     <fieldset disabled={loading_transaction}>
-                        <div className={this.getClassName("Email")} >
-                            <label className="control-label" htmlFor="Wallet">Your E-mail</label>
-                            <input className="form-control" value = {this.state.Email} onChange = {this.handleChange} name="Email" type="text" placeholder="@" />
-                        </div>
-                        <div className={this.getClassName("Wallet")} >
-                        	<label className="control-label" htmlFor="Wallet">Your {cryptoTo.Symbol} address</label>
-                        	<input className="form-control" value = {this.state.Wallet} onChange = {this.handleChange} name="Wallet" type="text" placeholder={cryptoTo.Symbol + " destination address"} />
-                        </div>
-                        <div className={this.getClassName("RefundWallet")} >
-                            <label className="control-label" htmlFor="RefundWallet">Your {cryptoFrom.Symbol} address</label>
-                            <input className="form-control" value = {this.state.RefundWallet} onChange = {this.handleChange} name="RefundWallet" type="text" placeholder={cryptoFrom.Symbol + " refund address"} />
-                        </div>
-                        <div className={this.getClassName("AgreeRules")}>
-                            <div className="checkbox">
-                            	<label className="control-label">
-    	                        	<input type="checkbox" name="checkbox-input" value = {this.state.AgreeRules} onChange = {this.handleChange} name="AgreeRules" />
-    	                        	I Agree with rules bla bla bla
-                            	</label>
-                           </div>
+                        <div className="loader-container">
+                            {loader}
+                            <div className={this.getClassName("Email")} >
+                                <label className="control-label" htmlFor="Wallet">Your E-mail</label>
+                                <input className="form-control" value = {this.state.Email} onChange = {this.handleChange} name="Email" type="text" placeholder="@" />
+                            </div>
+                            <div className={this.getClassName("Wallet")} >
+                                <label className="control-label" htmlFor="Wallet">Your {cryptoTo.Symbol} address</label>
+                                <input className="form-control" value = {this.state.Wallet} onChange = {this.handleChange} name="Wallet" type="text" placeholder={cryptoTo.Symbol + " destination address"} />
+                            </div>
+                            <div className={this.getClassName("RefundWallet")} >
+                                <label className="control-label" htmlFor="RefundWallet">Your {cryptoFrom.Symbol} address</label>
+                                <input className="form-control" value = {this.state.RefundWallet} onChange = {this.handleChange} name="RefundWallet" type="text" placeholder={cryptoFrom.Symbol + " refund address"} />
+                            </div>
+                            <div className={this.getClassName("AgreeRules")}>
+                                <div className="checkbox">
+                                    <label className="control-label">
+                                        <input type="checkbox" name="checkbox-input" value = {this.state.AgreeRules} onChange = {this.handleChange} name="AgreeRules" />
+                                        I Agree with rules bla bla bla
+                                    </label>
+                               </div>
+                            </div>
                         </div>
 
                         <CSSTransition in={transactionError ? true : false} timeout={1000} classNames="fade" mountOnEnter={true} unmountOnExit={true}>           

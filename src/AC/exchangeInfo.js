@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { TOGGLE_ACTIVE_CRYPTO, SET_AMOUNT_CRYPTO, LOAD_CRYPTO_PAIR, CREATE_TRANSACTION, START, SUCCESS, FAIL } from '../constants'
+import { TOGGLE_ACTIVE_CRYPTO, SET_AMOUNT_CRYPTO, LOAD_CRYPTO_PAIR, CREATE_TRANSACTION, REDIRECT_TO_TRANSACTION_FINISHED, START, SUCCESS, FAIL } from '../constants'
 import querystring from 'querystring';
 
 export function toggleActiveCrypto(symbol, type) {
@@ -76,4 +76,10 @@ export function createTransaction(transaction) {
       })
     });
   }
+}
+
+export function redirectToTransactionFinished() {
+    return { 
+        type: REDIRECT_TO_TRANSACTION_FINISHED 
+    }
 }
